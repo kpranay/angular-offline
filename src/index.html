@@ -6,8 +6,23 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#1976d2">
+  <!-- <script src='/assets/alasql.min.js'></script>
+ <script>
+    alasql('CREATE INDEXEDDB DATABASE IF NOT EXISTS imdbmovies;\
+            ATTACH INDEXEDDB DATABASE imdbmovies; \
+            USE imdbmovies; \
+            DROP TABLE IF EXISTS movie; \
+            CREATE TABLE movie; \
+            SELECT * INTO movie FROM CSV("/assets/IMDbmovies.csv",{headers:true});\
+            SELECT VALUE COUNT(*) FROM movie',[], function(res){
+        document.write('Number of records loaded into IndexedDB: ', res.pop());
+    });
+</script> -->
 </head>
 <body>
   <app-root></app-root>
+  <noscript>Please enable JavaScript to continue using this application.</noscript>
 </body>
 </html>
