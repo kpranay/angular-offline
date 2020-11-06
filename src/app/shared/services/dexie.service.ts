@@ -7,19 +7,19 @@ import Dexie from 'dexie';
 export class DexieService extends Dexie {
 
   constructor() {
-    super('imdbmovies');
-    this.version(1.3).stores({
-      movie: '++imdb_title_id,[title]',
+    super('imdbmovies4');
+    this.version(1.0).stores({
+      movie: '++id, imdb_title_id, title',
     });
 
-    this.version(2).stores({
-      movie: '++imdb_title_id,[title]'
-    }).upgrade(tx => {
-        // Will only be executed if a version below 2 was installed.
-        return (tx.table('movie') as any).modify(movie => {
-          movie.imdb_title_id = +movie.imdb_title_id.split('tt')[1];
-        });
-    });
+    // this.version(2).stores({
+    //   movie: '++imdb_title_id,[title]'
+    // }).upgrade(tx => {
+    //     // Will only be executed if a version below 2 was installed.
+    //     return (tx.table('movie') as any).modify(movie => {
+    //       movie.imdb_title_id = +movie.imdb_title_id.split('tt')[1];
+    //     });
+    // });
   //   this.version(3).stores({
   //     movie: '++imdb_title_id,[title]'
   // }).upgrade(tx => {

@@ -19,9 +19,9 @@ export class AppComponent implements OnInit {
     this.ms.get100().then((movies: Array<Movie>) => {
       this.moviesData = movies;
     });
-    setTimeout(() => this.ms.getAll().then((movies: Array<Movie>) => {
-      this.allMoviesData = movies;
-    }), 100);
+    // setTimeout(() => this.ms.getAll().then((movies: Array<Movie>) => {
+    //   this.allMoviesData = movies;
+    // }), 100);
     // this.ms.getMoviesByTitle('Miss').then((movies: Array<Movie>) => {
     //   console.log('Miss movies>>', movies);
     // }, (error) => {
@@ -51,21 +51,26 @@ export class AppComponent implements OnInit {
   }
 
   searchByTitle() {
-    console.log('inside search by title>>', this.searchText);
-    if (!this.searchText) {
-      this.moviesData = this.allMoviesData.slice(0, 100);
-    } else {
-      const filteredMovies = [];
-      for (const m of this.allMoviesData) {
-        if (('' + m.title).toLowerCase().includes(this.searchText.toLowerCase())) {
-          filteredMovies.push(m);
-        }
-        if (filteredMovies.length === 100) {
-          break;
-        }
-      }
-      this.moviesData = filteredMovies;
-    }
+    this.ms.getMoviesByTitle(this.searchText).then((movies: Array<Movie>) => {
+      console.log('movies response>>', movies.length);
+      this.moviesData = movies;
+    }, (error) => {
+      console.log('error>>', error);
+    });
+    // if (!this.searchText) {
+    //   this.moviesData = this.allMoviesData.slice(0, 100);
+    // } else {
+    //   const filteredMovies = [];
+    //   for (const m of this.allMoviesData) {
+    //     if (('' + m.title).toLowerCase().includes(this.searchText.toLowerCase())) {
+    //       filteredMovies.push(m);
+    //     }
+    //     if (filteredMovies.length === 100) {
+    //       break;
+    //     }
+    //   }
+    //   this.moviesData = filteredMovies;
+    // }
     // this.ms.getAll().then((movies: Array<Movie>) => {
     //   if (!this.searchText) {
     //     this.moviesData = movies.slice(0, 100);

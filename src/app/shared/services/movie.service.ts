@@ -18,7 +18,7 @@ export class MovieService {
   }
 
   getMoviesByTitle(movieName) {
-    return this.table.where('title').equalsIgnoreCase(movieName).toArray();
+    return this.table.where('title').startsWithIgnoreCase(movieName).toArray();
   }
 
   get100() {
