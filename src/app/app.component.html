@@ -331,7 +331,10 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
+<div>
+  <input type="text" [(ngModel)]="searchText" name="searchText"/>
+  <button (click)="searchByTitle()">Search</button>
+</div>
 
 <table>
   <thead>
