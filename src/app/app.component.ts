@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Movie, MovieService } from './shared/services/movie.service';
+import { NetworkStatusService } from './shared/services/networkStatus.service';
 
 @Component({
   selector: 'app-root',
@@ -7,13 +8,21 @@ import { Movie, MovieService } from './shared/services/movie.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-
-  constructor() {
-
+  title = 'test';
+  searchText = '';
+  allMoviesData = [];
+  moviesData = [];
+  constructor(private ms: MovieService, private networkService: NetworkStatusService) {
   }
 
   ngOnInit() {
-
+    this.networkService.status.subscribe(status => {
+      console.log('IS online', status);
+    });
+    // console.log('internet Connection>>> ', this.noInternetConnection);
+    this.ms.get100().then((movies: Array<Movie>) => {
+      this.moviesData = movies;
+    });
     // setTimeout(() => this.ms.getAll().then((movies: Array<Movie>) => {
     //   this.allMoviesData = movies;
     // }), 100);
@@ -22,7 +31,6 @@ export class AppComponent implements OnInit {
     // }, (error) => {
     //   console.log('error>>', error);
     // });
-
     // const request = window.indexedDB.open('imdbmovies', 20);
     // request.onerror = (event: any) => {
     //   // Do something with request.errorCode!

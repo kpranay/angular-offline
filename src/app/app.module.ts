@@ -9,6 +9,7 @@ import { DexieService } from './shared/services/dexie.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MovieCreateComponent } from './movie-create/movie-create.component';
 import { MoviesComponent } from './movies/movies.component';
+import { NetworkStatusService } from './shared/services/networkStatus.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { MoviesComponent } from './movies/movies.component';
     ReactiveFormsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
-  providers: [],
+  providers: [NetworkStatusService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
