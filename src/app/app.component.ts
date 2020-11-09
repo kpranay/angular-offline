@@ -7,18 +7,13 @@ import { Movie, MovieService } from './shared/services/movie.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'test';
-  searchText = '';
-  allMoviesData = [];
-  moviesData = [];
-  constructor(private ms: MovieService) {
+
+  constructor() {
 
   }
 
   ngOnInit() {
-    this.ms.get100().then((movies: Array<Movie>) => {
-      this.moviesData = movies;
-    });
+
     // setTimeout(() => this.ms.getAll().then((movies: Array<Movie>) => {
     //   this.allMoviesData = movies;
     // }), 100);
@@ -27,7 +22,7 @@ export class AppComponent implements OnInit {
     // }, (error) => {
     //   console.log('error>>', error);
     // });
-        
+
     // const request = window.indexedDB.open('imdbmovies', 20);
     // request.onerror = (event: any) => {
     //   // Do something with request.errorCode!
@@ -50,7 +45,7 @@ export class AppComponent implements OnInit {
     // };
   }
 
-  searchByTitle() {
+  /*searchByTitle() {
     this.ms.getMoviesByTitle(this.searchText).then((movies: Array<Movie>) => {
       console.log('movies response>>', movies.length);
       this.moviesData = movies;
@@ -88,4 +83,25 @@ export class AppComponent implements OnInit {
     //   }
     // });
   }
+
+  editMovie(movie){
+    console.log('edit', movie);
+  }
+
+  deleteMovie(movie){
+    console.log('delete', movie);
+    this.ms.add({
+      actors: "prabhas",
+      director: "SSR",
+      duration: 60,
+      genre: "Drama",
+      id: 99999,
+      imdb_title_id: "tt101",
+      title: "Bahubali 1",
+      writer: "SSR",
+      year: 2016
+    }).then((d => console.log('movie added :::', d)),(error => console.log('error',error)));
+    console.log(movie.id);
+    // this.ms.remove(99999).then(r => console.log('deleted :: ', r));
+  }*/
 }
