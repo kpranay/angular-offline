@@ -7,10 +7,12 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { DexieService } from './shared/services/dexie.service';
 import { FormsModule } from '@angular/forms';
+import { MovieCreateComponent } from './movie-create/movie-create.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MovieCreateComponent
   ],
   imports: [
     BrowserModule,
