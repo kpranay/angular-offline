@@ -29,7 +29,7 @@ export class MovieCreateComponent implements OnInit {
               alert('not able to find');
             }
           }, (error) => {
-            console.log('Something went wrong when searching for  ' + movieId);
+            console.log('Something went wrong when searching for  ' + this.movieId);
           }
         );
       }
