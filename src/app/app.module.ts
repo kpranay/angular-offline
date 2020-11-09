@@ -7,6 +7,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { DexieService } from './shared/services/dexie.service';
 import { FormsModule } from '@angular/forms';
+import { NetworkStatusService } from './shared/services/networkStatus.service';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [],
+  providers: [NetworkStatusService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
