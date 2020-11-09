@@ -21,10 +21,15 @@ export class MovieService {
     return this.table.where('title').startsWithIgnoreCase(movieName).toArray();
   }
 
+  getMoviesById(movieId) {
+    return this.table.get(movieId);
+  }
+
   get100() {
     return this.table.limit(100).toArray();
   }
   getAll() {
+
     return this.table.toArray();
   }
 

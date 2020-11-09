@@ -1,0 +1,33 @@
+<div>
+  <input type="text" [(ngModel)]="searchText" name="searchText"/>
+  <button (click)="searchByTitle()">Search</button>
+  <button (click)="addMovie()">Add</button>
+</div>
+
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Director</th>
+      <th>Date Published</th>
+      <th>Actors</th>
+      <th>Rating</th>
+      <th>Duration</th>
+      <th> Actions </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let movie of moviesData">
+      <td>{{movie.title}}</td>
+      <td>{{movie.director}}</td>
+      <td>{{movie.date_published}}</td>
+      <td>{{movie.actors}}</td>
+      <td>{{movie.avg_vote}}</td>
+      <td>{{movie.duration}}</td>
+      <td>
+        <button (click)="editMovie(movie)">Edit</button>
+        <button (click)="deleteMovie(movie)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
