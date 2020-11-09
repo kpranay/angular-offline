@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Movie, MovieService } from './shared/services/movie.service';
+import { NetworkStatusService } from './shared/services/networkStatus.service';
 
 @Component({
   selector: 'app-root',
@@ -8,11 +9,14 @@ import { Movie, MovieService } from './shared/services/movie.service';
 })
 export class AppComponent implements OnInit {
 
-  constructor() {
+  constructor(private networkService: NetworkStatusService) {
 
   }
 
   ngOnInit() {
+    this.networkService.status.subscribe(status => {
+      console.log('IS online', status);
+    });
 
     // setTimeout(() => this.ms.getAll().then((movies: Array<Movie>) => {
     //   this.allMoviesData = movies;
