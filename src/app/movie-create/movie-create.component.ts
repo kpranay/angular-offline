@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MovieIndexDbService } from '../shared/services/movie.indexdb.service';
 import { MovieService } from '../shared/services/movie.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { MovieService } from '../shared/services/movie.service';
 })
 export class MovieCreateComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private ms: MovieService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private fb: FormBuilder, private mis: MovieIndexDbService, private router: Router, private route: ActivatedRoute) { }
   movieFG: FormGroup;
   isEdit = false;
   movieId: number;
@@ -21,7 +22,7 @@ export class MovieCreateComponent implements OnInit {
       if (val.type === 'edit') {
         this.isEdit = true;
         this.movieId = +this.route.snapshot.paramMap.get('id');
-        this.ms.getMoviesById(this.movieId).then(
+        this.mis.getMoviesById(this.movieId).then(
           (movieVal) => {
             if (movieVal) {
               this.populateFormWithMovie(movieVal);
@@ -94,7 +95,7 @@ export class MovieCreateComponent implements OnInit {
   createMovie(){
     if (this.movieFG.valid) {
       console.log(this.movieFG.value);
-      this.ms.add(this.movieFG.value).then( (val) => {
+      this.mis.add(this.movieFG.value).then( (val) => {
         alert(this.movieFG.value.title + ' added successfully');
         this.router.navigate(['']);
       }, (error) => {
@@ -106,7 +107,7 @@ export class MovieCreateComponent implements OnInit {
   }
 
   updateMovie() {
-    this.ms.update(this.movieId, this.movieFG.value);
+    this.mis.update(this.movieId, this.movieFG.value);
     this.router.navigate(['']);
   }
 }

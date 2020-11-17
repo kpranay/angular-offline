@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Movie, MovieService } from '../shared/services/movie.service';
+import { Movie, MovieIndexDbService } from '../shared/services/movie.indexdb.service';
+import { MovieService } from '../shared/services/movie.service';
 
 @Component({
   selector: 'app-movies',
@@ -13,19 +14,24 @@ export class MoviesComponent implements OnInit {
   searchText = '';
   allMoviesData = [];
   moviesData = [];
-  constructor(private ms: MovieService, private router: Router) { }
+  constructor(
+    private mis: MovieIndexDbService,
+    private ms: MovieService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.getMovies();
   }
 
   getMovies(){
-    this.ms.get100().then((movies: Array<Movie>) => {
+    this.ms.getAll().subscribe((movies: Array<Movie>) => {
       this.moviesData = movies;
+    }, (error) => {
+      console.log('unable to get movies');
     });
   }
   searchByTitle() {
-    this.ms.getMoviesByTitle(this.searchText).then((movies: Array<Movie>) => {
+    this.mis.getMoviesByTitle(this.searchText).then((movies: Array<Movie>) => {
       console.log('movies response>>', movies.length);
       this.moviesData = movies;
     }, (error) => {
@@ -39,7 +45,7 @@ export class MoviesComponent implements OnInit {
 
   deleteMovie(movie){
     console.log('delete', movie);
-    this.ms.remove(movie.id).then((val ) => {
+    this.mis.remove(movie.id).then((val ) => {
       this.searchText = '';
       this.getMovies();
     }, (error) => {

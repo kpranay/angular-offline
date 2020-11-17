@@ -7,9 +7,9 @@ export class NetworkStatusService {
 
   private networkStatus = new BehaviorSubject<boolean>(false);
   status = this.networkStatus.asObservable();
-  public onlineEvent: Observable<Event>;
-  public offlineEvent: Observable<Event>;
-  public subscriptions: Subscription[] = [];
+  private onlineEvent: Observable<Event>;
+  private offlineEvent: Observable<Event>;
+  private subscriptions: Subscription[] = [];
 
   constructor() {
     this.networkStatus.next(navigator.onLine);
@@ -21,5 +21,9 @@ export class NetworkStatusService {
     this.subscriptions.push(this.offlineEvent.subscribe(e => {
         this.networkStatus.next(false);
     }));
+   }
+
+   isOnline() {
+     return this.networkStatus.value;
    }
 }
