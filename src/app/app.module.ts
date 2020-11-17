@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MovieCreateComponent } from './movie-create/movie-create.component';
 import { MoviesComponent } from './movies/movies.component';
 import { NetworkStatusService } from './shared/services/networkStatus.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { NetworkStatusService } from './shared/services/networkStatus.service';
     FormsModule,
     ReactiveFormsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    HttpClientModule,
   ],
   providers: [NetworkStatusService],
   bootstrap: [AppComponent]
