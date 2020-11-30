@@ -15,4 +15,10 @@ export class MovieService {
   getAll() {
     return this.http.get(`${environment.api}/movie`);
   }
+  getById() {
+    return this.http.get(`${environment.api}/movie/1`);
+  }
+  getById2() {
+    return this.http.get(`${environment.api}/movie/1/test/2`);
+  }
 }
